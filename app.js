@@ -1,17 +1,25 @@
 $(function(){
+var clicks = 1;
+
   $("#generate").on("click", function(event){
-    $("body").append("<br><container id=\"moreButtons\"><button id=\"deleteButton\">Delete</button><button id=\"changeButton\">Change</button></container>");
+    $("body").append("<container id=\"moreButtons\"><br><button id=\"deleteButton\">Delete</button><button id=\"changeButton\">Change</button></container>");
   })
 
-  $("body").on("click", "#deleteButton", function(event){
-    console.log("delete button clicked");
+  $("body").on("click", "#deleteButton", function(event){  //delete function - also resets count
     $(this).parent().remove();
+    clicks=1;
   });
 
-  $("body").on("click", "#changeButton", function(event){
-    console.log("change button clicked");
+  $("body").on("click", "#changeButton", function(event){   //change function
+  $("#moreButtons").append("<div id=\"counter\"></div>");
+  $(this).parent().toggleClass("red");
+    clickCounter();
   });
+
+function clickCounter(){
+  $("#counter").empty();
+  $("#counter").append("<p id=\"counter\">Change button clicked " + clicks + " time(s).")
+  clicks++;
+}
 
 });
-
-// Additionally, there should be text that provides a number. The number should be the number of times the 'generate' button has been clicked.
